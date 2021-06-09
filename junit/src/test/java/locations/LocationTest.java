@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LocationTest {
+class LocationTest implements PrintNameCapable {
 
     LocationParser locationParser;
     String location1 = "Bp,11.0,15.2254";
