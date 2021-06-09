@@ -1,8 +1,6 @@
 package locations;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,11 +14,13 @@ class LocationTest implements PrintNameCapable {
 
 
     @BeforeEach
+    @DisplayName("Do this before each test methods")
     void doThisBefore() {
        locationParser = new LocationParser();
     }
 
     @Test
+    @DisplayName("Test parse method from LocationParser class")
     void testParse() {
 
         String text = "Bp,47.497912,19.040235";
@@ -31,6 +31,7 @@ class LocationTest implements PrintNameCapable {
     }
 
     @Test
+    @DisplayName("Test with locations not on Equator")
     void testIsNotOnEquator() {
         assertFalse(locationParser.isOnEquator(location1));
         assertFalse(locationParser.isOnEquator(location4));
