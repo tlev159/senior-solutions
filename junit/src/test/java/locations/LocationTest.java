@@ -25,33 +25,50 @@ class LocationTest implements PrintNameCapable {
 
         String text = "Bp,47.497912,19.040235";
 
-        assertEquals("Bp", locationParser.parse(text).getName());
-        assertEquals(47.497912, locationParser.parse(text).getLat());
-        assertEquals(19.040235, locationParser.parse(text).getLon());
+        Location l = locationParser.parse(text);
+
+        assertEquals("Bp", l.getName());
+        assertEquals(47.497912, l.getLat());
+        assertEquals(19.040235, l.getLon());
     }
 
     @Test
     @DisplayName("Test with locations not on Equator")
     void testIsNotOnEquator() {
-        assertFalse(locationParser.isOnEquator(location1));
-        assertFalse(locationParser.isOnEquator(location4));
+        assertEquals(false, locationParser.isOnEquator(location1));
+        assertEquals(false, locationParser.isOnEquator(location4));
     }
 
     @Test
     void testIsOnEquatorTrue() {
-        assertTrue(locationParser.isOnEquator(location3));
+        assertEquals(true, locationParser.isOnEquator(location3));
     }
 
     @Test
     void testIsOnPrimeMeridian() {
-        assertTrue(locationParser.isOnPrime(location2));
-        assertTrue(locationParser.isOnPrime(location3));
+        assertEquals(true, locationParser.isOnPrime(location2));
+        assertEquals(true, locationParser.isOnPrime(location3));
     }
 
     @Test
     void testIsNotOnPrimeMeridian() {
-        assertFalse(locationParser.isOnPrime(location1));
-        assertFalse(locationParser.isOnPrime(location4));
+        assertEquals(false, locationParser.isOnPrime(location1));
+        assertEquals(false, locationParser.isOnPrime(location4));
+    }
+
+    @Test
+    void testParseTwice() {
+
+        String text = "Bp,47.497912,19.040235";
+
+        Location l1 = locationParser.parse(text);
+        Location l2 = locationParser.parse(text);
+
+        assertEquals(l1.getName(), l2.getName());
+        assertEquals(l1.getLat(), l2.getLat());
+        assertEquals(l1.getLon(), l2.getLon());
+
+        assertSame(false, l1 == l2);
     }
 
 }
