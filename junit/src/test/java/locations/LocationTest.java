@@ -71,4 +71,17 @@ class LocationTest implements PrintNameCapable {
         assertSame(false, l1 == l2);
     }
 
+    @Test
+    void testDistance() {
+
+        String locationOfSzegedZoo = "Szeged,46.25190915461344, 20.118282168918878";
+        String locationOfBudapestZoo = "Budapest,47.519099118506574, 19.077632568969534";
+
+        Location l1 = locationParser.parse(locationOfSzegedZoo);
+        Location l2 = locationParser.parse(locationOfBudapestZoo);
+
+        double distance = 161.55;
+
+        assertEquals(distance, l1.distance(l2), 0.08);
+    }
 }

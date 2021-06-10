@@ -12,6 +12,27 @@ public class Location {
         this.lon = lon;
     }
 
+    public double distance(Location loc) {
+
+        final int R = 6371; // Radius of the earth
+
+        double latDistance = Math.toRadians(loc.getLat() - this.getLat());
+        double lonDistance = Math.toRadians(loc.getLon() - this.getLon());
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(this.getLat())) * Math.cos(Math.toRadians(loc.getLat()))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+//        double distance = R * c * 1000; // convert to meters
+        double distance = R * c; // distance in km
+
+        double height = 0.0;
+
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+
+        return Math.sqrt(distance);
+    }
+
+
     public String getName() {
         return name;
     }
