@@ -84,4 +84,16 @@ class LocationTest implements PrintNameCapable {
 
         assertEquals(distance, l1.distance(l2), 0.08);
     }
+
+    @Test
+    void testAllParameterOfLocationParser() {
+
+        String locationOfSzegedZoo = "Szeged,46.25190915461344,20.118282168918878";
+
+        Location resultLocation = locationParser.parse(locationOfSzegedZoo);
+        String result = resultLocation.getName() + "," + resultLocation.getLat() + "," + resultLocation.getLon();
+
+        assertEquals(locationOfSzegedZoo, result);
+
+    }
 }
