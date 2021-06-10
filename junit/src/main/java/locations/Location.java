@@ -7,6 +7,12 @@ public class Location {
     private double lon;
 
     public Location(String name, double lat, double lon) {
+        if (lat < -90 || lat > 90) {
+            throw new IllegalArgumentException("Latitude parameter is not correct!");
+        }
+        if (lon < -180 || lon > 180) {
+            throw new IllegalArgumentException("Longitude parameter is not correct!");
+        }
         this.name = name;
         this.lat = lat;
         this.lon = lon;
@@ -57,4 +63,12 @@ public class Location {
         this.lon = lon;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                '}';
+    }
 }

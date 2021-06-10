@@ -2,6 +2,9 @@ package locations;
 
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LocationTest implements PrintNameCapable {
@@ -94,6 +97,34 @@ class LocationTest implements PrintNameCapable {
         String result = resultLocation.getName() + "," + resultLocation.getLat() + "," + resultLocation.getLon();
 
         assertEquals(locationOfSzegedZoo, result);
-
     }
+
+    @Test
+    void testWrongLatitudeParameterLower() {
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new Location("SomewhereThere",-90.334,11.121));
+        assertEquals("Latitude parameter is not correct!", ex.getMessage());
+    }
+
+    @Test
+    void testWrongLatitudeParameterHigher() {
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new Location("SomewhereThere",94.334,11.121));
+        assertEquals("Latitude parameter is not correct!", ex.getMessage());
+    }
+
+    @Test
+    void testWrongLongitudeParameterLower() {
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new Location("SomewhereThere",-9.334,-195.121));
+        assertEquals("Longitude parameter is not correct!", ex.getMessage());
+    }
+
+    @Test
+    void testWrongLongitudeParameterHigher() {
+
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () -> new Location("SomewhereThere",-9.334,211.121));
+        assertEquals("Longitude parameter is not correct!", ex.getMessage());
+    }
+
 }
