@@ -59,8 +59,8 @@ class LocationTest implements PrintNameCapable {
         Location location2 = locationParser.parse(locationTxt2);
         Location location3 = locationParser.parse(locationTxt3);
 
-        assertEquals(true, locationParser.isOnPrime(location2));
-        assertEquals(true, locationParser.isOnPrime(location3));
+        assertEquals(true, locationParser.isOnPrimeMeridian(location2));
+        assertEquals(true, locationParser.isOnPrimeMeridian(location3));
     }
 
     @Test
@@ -69,8 +69,8 @@ class LocationTest implements PrintNameCapable {
         Location location1 = locationParser.parse(locationTxt1);
         Location location4 = locationParser.parse(locationTxt4);
 
-        assertEquals(false, locationParser.isOnPrime(location1));
-        assertEquals(false, locationParser.isOnPrime(location4));
+        assertEquals(false, locationParser.isOnPrimeMeridian(location1));
+        assertEquals(false, locationParser.isOnPrimeMeridian(location4));
     }
 
     @Test

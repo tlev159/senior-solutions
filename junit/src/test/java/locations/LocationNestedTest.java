@@ -31,8 +31,8 @@ public class LocationNestedTest {
         }
 
         @Test
-        void testIsLocation1OnPrime() {
-            assertEquals(true, locationParser.isOnPrime(location));
+        void testIsLocation1OnPrimeMeridian() {
+            assertEquals(true, locationParser.isOnPrimeMeridian(location));
         }
     }
 
@@ -51,8 +51,8 @@ public class LocationNestedTest {
         }
 
         @Test
-        void testIsLocation2OnPrime() {
-            assertEquals(false, locationParser.isOnPrime(location));
+        void testIsLocation2OnPrimeMeridian() {
+            assertEquals(false, locationParser.isOnPrimeMeridian(location));
         }
 
     }

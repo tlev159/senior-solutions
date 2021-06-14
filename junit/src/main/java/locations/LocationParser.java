@@ -13,7 +13,7 @@ public class LocationParser {
         return location.getLat() == 0;
     }
 
-    public boolean isOnPrime(Location location) {
+    public boolean isOnPrimeMeridian(Location location) {
         return location.getLon() == 0;
     }
 
