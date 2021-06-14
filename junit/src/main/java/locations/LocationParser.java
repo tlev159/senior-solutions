@@ -9,12 +9,12 @@ public class LocationParser {
         return new Location(temp[0], Double.parseDouble(temp[1]), Double.parseDouble(temp[2]));
     }
 
-    public boolean isOnEquator(String text) {
-        return parse(text).getLat() == 0;
+    public boolean isOnEquator(Location location) {
+        return location.getLat() == 0;
     }
 
-    public boolean isOnPrime(String text) {
-        return parse(text).getLon() == 0;
+    public boolean isOnPrime(Location location) {
+        return location.getLon() == 0;
     }
 
 }
