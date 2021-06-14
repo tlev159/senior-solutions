@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class LocationTest implements PrintNameCapable {
 
     LocationParser locationParser;
-    String location1 = "Bp,11.0,15.2254";
-    String location2 = "NY,40.145,0.0";
-    String location3 = "Eq,0.0,0.0";
-    String location4 = "Somewhere,1.111,2.2254";
+    String locationTxt1 = "Bp,11.0,15.2254";
+    String locationTxt2 = "NY,40.145,0.0";
+    String locationTxt3 = "Eq,0.0,0.0";
+    String locationTxt4 = "Somewhere,1.111,2.2254";
 
 
     @BeforeEach
@@ -38,23 +38,37 @@ class LocationTest implements PrintNameCapable {
     @Test
     @DisplayName("Test with locations not on Equator")
     void testIsNotOnEquator() {
+
+        Location location1 = locationParser.parse(locationTxt1);
+        Location location4 = locationParser.parse(locationTxt4);
         assertEquals(false, locationParser.isOnEquator(location1));
         assertEquals(false, locationParser.isOnEquator(location4));
     }
 
     @Test
     void testIsOnEquatorTrue() {
+
+        Location location3 = locationParser.parse(locationTxt3);
+
         assertEquals(true, locationParser.isOnEquator(location3));
     }
 
     @Test
     void testIsOnPrimeMeridian() {
+
+        Location location2 = locationParser.parse(locationTxt2);
+        Location location3 = locationParser.parse(locationTxt3);
+
         assertEquals(true, locationParser.isOnPrime(location2));
         assertEquals(true, locationParser.isOnPrime(location3));
     }
 
     @Test
     void testIsNotOnPrimeMeridian() {
+
+        Location location1 = locationParser.parse(locationTxt1);
+        Location location4 = locationParser.parse(locationTxt4);
+
         assertEquals(false, locationParser.isOnPrime(location1));
         assertEquals(false, locationParser.isOnPrime(location4));
     }
