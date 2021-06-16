@@ -12,26 +12,27 @@ import java.util.List;
 @RestController
 public class LocationsController {
 
+    private LocationsService locationsService;
+
+    public LocationsController(LocationsService locationsService) {
+        this.locationsService = locationsService;
+    }
 
     @GetMapping("/locations")
     public String getLocations() {
         StringBuilder result = new StringBuilder();
-        LocationsService locationsService = new LocationsService();
         List<Location> temp = locationsService.getLocations();
         for (Location location:temp) {
-//        Location location = temp.get(0);
-            result.append("<h3>").append(String.valueOf(location.getId()))
+            result.append("<p>").append(location.getId())
                     .append(". ")
                     .append(location.getName())
                     .append(" ( lat: ")
-                    .append(String.valueOf(location.getLat()))
+                    .append(location.getLat())
                     .append(", lon: ")
-                    .append(String.valueOf(location.getLon()))
-                    .append(")</h3>");
+                    .append(location.getLon())
+                    .append(")<p>");
         }
-        System.out.println(result);
         return result.toString();
-//        return result;
     }
 
 }
