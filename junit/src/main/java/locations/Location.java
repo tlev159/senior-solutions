@@ -6,6 +6,9 @@ public class Location {
     private double lat;
     private double lon;
 
+    public Location() {
+    }
+
     public Location(String name, double lat, double lon) {
         if (lat < -90 || lat > 90) {
             throw new IllegalArgumentException("Latitude parameter is not correct!");

@@ -1,6 +1,8 @@
 package meetingrooms;
 
-public class Meetingroom {
+import org.springframework.cglib.core.Local;
+
+public class MeetingRoom {
 
     private long id;
 
@@ -10,13 +12,16 @@ public class Meetingroom {
 
     private int length;
 
-    public Meetingroom(String name, int with, int length) {
+    public MeetingRoom() {
+    }
+
+    public MeetingRoom(String name, int with, int length) {
         this.name = name;
         this.with = with;
         this.length = length;
     }
 
-    public Meetingroom(long id, String name, int with, int length) {
+    public MeetingRoom(long id, String name, int with, int length) {
         this.id = id;
         this.name = name;
         this.with = with;
@@ -45,11 +50,13 @@ public class Meetingroom {
 
     @Override
     public String toString() {
-        return "Meetingroom{" +
+        return "MeetingRoom{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", with=" + with +
                 ", length=" + length +
                 '}';
     }
+
+
 }
