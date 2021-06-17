@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class MariadbMeetingRoomsRepository implements MeetingRoomsRepository {
 
@@ -23,8 +24,7 @@ public class MariadbMeetingRoomsRepository implements MeetingRoomsRepository {
             flyway.migrate();
 
             jdbcTemplate = new JdbcTemplate(dataSource);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new IllegalStateException("Can not create datasource", e);
         }
 
@@ -48,22 +48,22 @@ public class MariadbMeetingRoomsRepository implements MeetingRoomsRepository {
     }
 
     @Override
-    public List<MeetingRoom> findAllWithAreaReverseOrderByArea() {
+    public List<String> findAllWithAreaReverseOrderByArea() {
         return null;
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByName(String name) {
+    public Optional<MeetingRoom> findMeetingRoomByName(String name) {
         return null;
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByAPieceOfTheName(String name) {
+    public List<MeetingRoom> findMeetingRoomByAPieceOfTheName(String name) {
         return null;
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByArea(int area) {
+    public List<MeetingRoom> findMeetingRoomByArea(int area) {
         return null;
     }
 
@@ -71,7 +71,6 @@ public class MariadbMeetingRoomsRepository implements MeetingRoomsRepository {
     public void deleteAll() {
         jdbcTemplate.update("delete from meetingroom");
     }
-
 
 
 }

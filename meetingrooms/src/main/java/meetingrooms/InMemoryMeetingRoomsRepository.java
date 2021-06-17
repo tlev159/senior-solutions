@@ -3,6 +3,7 @@ package meetingrooms;
 import java.text.Collator;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class InMemoryMeetingRoomsRepository implements MeetingRoomsRepository {
@@ -29,28 +30,34 @@ public class InMemoryMeetingRoomsRepository implements MeetingRoomsRepository {
     }
 
     @Override
-    public List<MeetingRoom> findAllWithAreaReverseOrderByArea() {
-
-        return null;
+    public List<String> findAllWithAreaReverseOrderByArea() {
+        return  meetingRooms.stream()
+                .sorted(Comparator.comparing(MeetingRoom::getArea).reversed())
+                .map(MeetingRoom::concatWithArea).collect(Collectors.toList());
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByName(String name) {
-        Predicate<String> pred = x -> x.equals(name);
-//        return meetingRooms.stream().anyMatch();
-        return meetingRooms.get(0);
+    public Optional<MeetingRoom> findMeetingRoomByName(String name) {
+        return meetingRooms.stream()
+                .filter(m -> m.getName().equals(name)).findFirst();
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByAPieceOfTheName(String name) {
-
-        return null;
+    public List<MeetingRoom> findMeetingRoomByAPieceOfTheName(String name) {
+        return meetingRooms.stream()
+                .filter(m -> m.getName().toLowerCase().contains(name.toLowerCase()))
+                .sorted(Comparator.comparing(MeetingRoom::getName))
+                .sorted(collator)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public MeetingRoom findMeetingRoomByArea(int area) {
-
-        return null;
+    public List<MeetingRoom> findMeetingRoomByArea(int area) {
+        return meetingRooms.stream()
+                .filter(m -> m.getArea() > area)
+                .sorted(Comparator.comparing(MeetingRoom::getName))
+                .sorted(collator)
+                .collect(Collectors.toList());
     }
 
     @Override

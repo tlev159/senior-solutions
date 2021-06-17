@@ -1,6 +1,7 @@
 package meetingrooms;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MeetingRoomsRepository {
 
@@ -10,13 +11,13 @@ public interface MeetingRoomsRepository {
 
     List<String> findAllReverseOrder();
 
-    List<MeetingRoom> findAllWithAreaReverseOrderByArea();
+    List<String> findAllWithAreaReverseOrderByArea();
 
-    MeetingRoom findMeetingRoomByName(String name);
+    Optional<MeetingRoom> findMeetingRoomByName(String name);
 
-    MeetingRoom findMeetingRoomByAPieceOfTheName(String name);
+    List<MeetingRoom> findMeetingRoomByAPieceOfTheName(String name);
 
-    MeetingRoom findMeetingRoomByArea(int area);
+    List<MeetingRoom> findMeetingRoomByArea(int area);
 
     void deleteAll();
 }

@@ -1,6 +1,7 @@
 package meetingrooms;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,8 +13,15 @@ public class MeetingRoomsService {
         this.meetingRoomsRepository = meetingRoomsRepository;
     }
 
-    public void save(MeetingRoom meetingRoom) {
-        meetingRoomsRepository.save(meetingRoom);
+    public boolean save(MeetingRoom meetingRoom) {
+        MeetingRoom room = meetingRoomsRepository
+                .findMeetingRoomByName(meetingRoom.getName()).orElse(null);
+        if (room != null) {
+            meetingRoomsRepository.save(meetingRoom);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public List<String> findAll() {
@@ -31,19 +39,19 @@ public class MeetingRoomsService {
                 .mapToObj(n -> temp.get(n)).collect(Collectors.toList());
     }
 
-    public List<MeetingRoom> findAllWithAreaReverseOrderByArea() {
+    public List<String> findAllWithAreaReverseOrderByArea() {
         return meetingRoomsRepository.findAllWithAreaReverseOrderByArea();
     }
 
     public MeetingRoom findMeetingRoomByName(String name) {
-        return findMeetingRoomByName(name);
+        return meetingRoomsRepository.findMeetingRoomByName(name).orElse(null);
     }
 
-    public MeetingRoom findMeetingRoomByAPieceOfTheName(String name) {
+    public List<MeetingRoom> findMeetingRoomByAPieceOfTheName(String name) {
         return meetingRoomsRepository.findMeetingRoomByAPieceOfTheName(name);
     }
 
-    public MeetingRoom findMeetingRoomByArea(int area) {
+    public List<MeetingRoom> findMeetingRoomByArea(int area) {
         return meetingRoomsRepository.findMeetingRoomByArea(area);
     }
 
