@@ -50,12 +50,12 @@ public class MeetingRoom {
 
     @Override
     public String toString() {
-        return "MeetingRoom{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", with=" + with +
-                ", length=" + length +
-                '}';
+        return name + " (szélesség: " + with + ", hosszúság: " + length + ")";
+    }
+
+    public String concatWithArea() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(this.toString()).append(", terülte: ").append(getArea()).toString();
     }
 
 
