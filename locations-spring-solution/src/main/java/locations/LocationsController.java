@@ -26,7 +26,7 @@ public class LocationsController {
             result.append("<p>").append(location.getId())
                     .append(". ")
                     .append(location.getName())
-                    .append(" ( lat: ")
+                    .append(" (lat: ")
                     .append(location.getLat())
                     .append(", lon: ")
                     .append(location.getLon())
