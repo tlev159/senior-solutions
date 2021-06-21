@@ -2,6 +2,7 @@ package locations;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,15 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/locations")
 public class LocationsController {
 
     private LocationsService locationsService;
 
     public LocationsController(LocationsService locationsService) {
+
         this.locationsService = locationsService;
     }
 
-    @GetMapping("/locations")
+    @GetMapping
     public String getLocations() {
         StringBuilder result = new StringBuilder();
         List<Location> temp = locationsService.getLocations();
