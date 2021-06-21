@@ -1,9 +1,7 @@
 package locations;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -22,20 +20,24 @@ public class LocationsController {
     }
 
     @GetMapping
-    public String getLocations() {
-        StringBuilder result = new StringBuilder();
-        List<Location> temp = locationsService.getLocations();
-        for (Location location:temp) {
-            result.append("<p>").append(location.getId())
-                    .append(". ")
-                    .append(location.getName())
-                    .append(" (lat: ")
-                    .append(location.getLat())
-                    .append(", lon: ")
-                    .append(location.getLon())
-                    .append(")<p>");
-        }
-        return result.toString();
+    public List<LocationDto> listLocations() {
+        return locationsService.listLocations();
     }
+//    @GetMapping
+//    public String getLocations() {
+//        StringBuilder result = new StringBuilder();
+//        List<Location> temp = locationsService.getLocations();
+//        for (Location location:temp) {
+//            result.append("<p>").append(location.getId())
+//                    .append(". ")
+//                    .append(location.getName())
+//                    .append(" (lat: ")
+//                    .append(location.getLat())
+//                    .append(", lon: ")
+//                    .append(location.getLon())
+//                    .append(")<p>");
+//        }
+//        return result.toString();
+//    }
 
 }
