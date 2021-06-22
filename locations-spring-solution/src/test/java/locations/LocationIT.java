@@ -14,7 +14,7 @@ class LocationIT {
 
     @Test
     void getLocation() {
-        String message = locationsController.getLocations();
+        String message = locationsController.listLocations().get(0).toString();
 
         assertThat(message)
                 .startsWith("<p>1. Budapest");
