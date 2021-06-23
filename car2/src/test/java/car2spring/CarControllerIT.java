@@ -1,4 +1,4 @@
-package cars;
+package car2spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,11 @@ public class CarControllerIT {
 
     @Test
     void getCarList() {
-        List<Car> result = carController.getCarList();
+        List<Car> result = carController.getAllCars();
 
         assertThat(result)
                 .hasSize(4)
-                .extracting(Car::getProducerName)
+                .extracting(Car::getBrand)
                 .contains("Opel", "Tesla");
     }
 
@@ -30,6 +30,7 @@ public class CarControllerIT {
 
         assertThat(result)
                 .hasSize(4)
-                .contains("Tesla");
+                .contains("Tesla", "Volvo");
     }
+
 }
