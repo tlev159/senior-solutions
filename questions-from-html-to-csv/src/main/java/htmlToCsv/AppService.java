@@ -15,7 +15,7 @@ public class AppService {
 
     private final String FIRST_SEPARATE = ">";
     private final String LAST_SEPARATE = "<";
-    private final String CSV_SEPARATOR = ";";
+    private final String CSV_SEPARATOR = "\";\"";
 
     private List<Question> questions = new ArrayList<>();
 
@@ -77,12 +77,12 @@ public class AppService {
     public void writeCsv(Path file) {
         try (BufferedWriter writer = Files.newBufferedWriter(file)){
             for (Question q:questions) {
-                writer.write(q.getQuestion());
+                writer.write("\"" + q.getQuestion());
                 writer.write(CSV_SEPARATOR);
                 for (String a:q.getAnswers()) {
                     writer.write(a + CSV_SEPARATOR);
                 }
-                writer.write("\n");
+                writer.write("\"\n");
             }
         }
         catch (IOException ioe) {
