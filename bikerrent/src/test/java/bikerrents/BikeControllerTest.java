@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,6 +56,8 @@ class BikeControllerTest {
                 .hasSize(4)
                 .extracting(BikeRent::getBikeId)
                 .contains("AG54", "SR85");
+
+        verify(bikeService).getBikeRents();
     }
 
     @Test
@@ -67,5 +70,7 @@ class BikeControllerTest {
         assertThat(result)
                 .hasSize(4)
                 .contains("DE574", "CH993");
+
+        verify(bikeService).getUserList();
     }
 }
