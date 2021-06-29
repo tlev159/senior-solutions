@@ -16,9 +16,7 @@ public class LocationsController {
     }
 
     @GetMapping("/locations")
-    public List<String> getLocations() {
-        return locationsService.getLocations().stream()
-                .map(l -> l.toString())
-                .collect(Collectors.toList());
+    public List<LocationDto> getLocations() {
+        return locationsService.getLocations();
     }
 }
