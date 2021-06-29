@@ -12,8 +12,8 @@ public class LocationsApplication {
     }
 
 
-    @Bean
-    public LocationsService locationsService() {
-        return new LocationsService();
-    }
+//    @Bean
+//    public LocationsService locationsService() {
+//        return new LocationsService();
+//    }
 }
