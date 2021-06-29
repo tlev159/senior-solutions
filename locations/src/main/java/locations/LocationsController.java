@@ -1,12 +1,13 @@
 package locations;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/locations")
 public class LocationsController {
 
     LocationsService locationsService;
@@ -15,8 +16,20 @@ public class LocationsController {
         this.locationsService = locationsService;
     }
 
-    @GetMapping("/locations")
-    public List<LocationDto> getLocations() {
-        return locationsService.getLocations();
+    @GetMapping("/s")
+    public List<LocationDto> getLocations(@RequestParam Optional<String> prefix) {
+        return locationsService.getLocations(prefix);
     }
+
+    @GetMapping
+    public LocationDto findMinLonLatLocation(@RequestParam Optional<String> min) {
+        return locationsService.findMinLonLocation(min);
+    }
+
+    @GetMapping("/{id}")
+    public LocationDto findLocationById(@PathVariable("id") long id) {
+        return locationsService.findLocationById(id);
+    }
+
+
 }
