@@ -1,0 +1,35 @@
+GET http://localhost:8080/api/movies
+Accept: application/json
+
+###
+GET http://localhost:8080/api/movies?title=titanic
+Accept: application/json
+
+###
+GET http://localhost:8080/api/movies/1
+Accept: application/json
+
+###
+PUT http://localhost:8080/api/movies/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "length": 99
+}
+
+###
+
+POST http://localhost:8080/api/movies
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Eiskalter Killer",
+  "length": 152
+}
+
+###
+DELETE http://localhost:8080/api/movies/2
+
+###
