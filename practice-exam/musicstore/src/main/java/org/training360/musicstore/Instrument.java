@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Instrument {
 
     private long id;
-    private String Brand;
+    private String brand;
     private InstrumentType type;
     private int price;
     private LocalDate postDate;
