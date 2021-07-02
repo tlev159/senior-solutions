@@ -67,8 +67,8 @@ public class MusicStoreService {
     public InstrumentDTO updatePrice(long id, UpdatePriceCommand command) {
         Instrument instrument = findInstrument(id);
         if (instrument.getPrice() != command.getPrice()) {
-            instruments.get(instruments.indexOf(instrument)).setPrice(command.getPrice());
-            instruments.get(instruments.indexOf(instrument)).setPostDate();
+            instrument.setPrice(command.getPrice());
+            instrument.setPostDate();
         }
         return modelMapper.map(instrument, InstrumentDTO.class);
     }
