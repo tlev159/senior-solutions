@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
@@ -13,12 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CreateInstrumentCommand {
 
-    @NotEmpty
+    @NotBlank(message = "Brand can not be blank!")
     private String Brand;
 
     private InstrumentType type;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "Price must be not negative!")
     private int price;
 
 }
