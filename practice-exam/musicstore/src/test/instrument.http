@@ -1,0 +1,38 @@
+###
+GET http://localhost:8080/api/instruments
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?price=250300
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?price=250300
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?price=250300
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?brand=Pong@price=12500
+Accept: application/json
+
+###
+POST http://localhost:8080/api/instuments
+Content-Type: application/json
+Accept: application/json
+
+{
+ "brand": "Feder",
+ "type": "InstrumentType.PIANO",
+ "price": 2300
+}
+
+###
+GET http://localhost:8080/api/instruments/2
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?price=250300
+Accept: application/json
