@@ -50,4 +50,21 @@ public class LocationsService {
         return result;
     }
 
+    public LocationDto createLocation(CreateLocationCommand command) {
+        Location location = new Location(id.incrementAndGet(), command.getName(), command.getLat(), command.getLon());
+        locations.add(location);
+        return modelMapper.map(location, LocationDto.class);
+    }
+
+    public LocationDto updateLocation(long id, UpdateLocationCommand command) {
+        Location result = findById(id);
+        result.setName(command.getName());
+        result.setLat(command.getLat());
+        result.setLon(command.getLon());
+        return modelMapper.map(result, LocationDto.class);
+    }
+
+    public void deleteById(long id) {
+        locations.remove(findById(id));
+    }
 }

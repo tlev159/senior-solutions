@@ -18,4 +18,18 @@ GET http://localhost:8080/locations/2
 Accept: application/json
 
 ###
+PUT http://localhost:8080/locations/2
+Content-Type: application/json
+Accept: application/json
 
+{
+  "name": "HelloThere",
+  "lat": -27.6,
+  "lon": -18.24
+}
+
+###
+DELETE http://localhost:8080/locations/2
+Accept: application/json
+
+###
