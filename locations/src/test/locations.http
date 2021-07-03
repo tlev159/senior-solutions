@@ -14,7 +14,7 @@ GET http://localhost:8080/locations?minLat=13.0&maxLat=50.0
 Accept: application/json
 
 ###
-GET http://localhost:8080/locations/2
+GET http://localhost:8080/locations/5
 Accept: application/json
 
 ###
@@ -31,5 +31,16 @@ Accept: application/json
 ###
 DELETE http://localhost:8080/locations/2
 Accept: application/json
+
+###
+POST http://localhost:8080/locations
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "HiThere",
+  "lat": 27.6,
+  "lon": -18.24
+}
 
 ###

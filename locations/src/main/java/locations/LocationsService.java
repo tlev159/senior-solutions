@@ -46,7 +46,7 @@ public class LocationsService {
         Location result = locations.stream()
                 .filter(l-> l.getId() == id)
                 .findFirst()
-                .orElseThrow(()-> new IllegalArgumentException("Location not found! (id: " + id + ")"));
+                .orElseThrow(()-> new LocationNotFoundException("Location not found! (id: " + id + ")"));
         return result;
     }
 
