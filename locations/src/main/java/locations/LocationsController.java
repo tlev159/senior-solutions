@@ -16,15 +16,11 @@ public class LocationsController {
         this.locationsService = locationsService;
     }
 
-    @GetMapping("/s")
-    public List<LocationDto> getLocations(@RequestParam Optional<String> prefix) {
-        return locationsService.getLocations(prefix);
+    @GetMapping()
+    public List<LocationDto> getLocations(@RequestParam Optional<String> prefix, @RequestParam Optional<Double> minLat, @RequestParam Optional<Double> maxLat, @RequestParam Optional<Double> minLon, @RequestParam Optional<Double> maxLon) {
+        return locationsService.getLocations(prefix, minLat, maxLat, minLon, maxLon);
     }
 
-    @GetMapping
-    public LocationDto findMinLonLatLocation(@RequestParam Optional<String> min) {
-        return locationsService.findMinLonLocation(min);
-    }
 
     @GetMapping("/{id}")
     public LocationDto findLocationById(@PathVariable("id") long id) {

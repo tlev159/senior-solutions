@@ -13,13 +13,9 @@ public class LocationsApplication {
     }
 
 
-//    @Bean
-//    public LocationsService locationsService() {
-//        return new LocationsService();
-//    }
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+    
 }

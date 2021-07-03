@@ -6,47 +6,48 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
 public class LocationsService {
 
-    private ModelMapper modelMapper;
+    private AtomicLong id = new AtomicLong();
 
-    private List<Location> locations = new ArrayList<>(List.of(
-     new Location(1L, "Somewhere", 23.45, 34.45),
-     new Location(2L, "There", 34.56, -12.23),
-     new Location(3L, "Here", -56.45, 53.45),
-     new Location(4L, "Nowhere", 10.0, 50.0)
-    ));
+    private ModelMapper modelMapper;
 
     public LocationsService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
-    public List<LocationDto> getLocations(Optional<String> prefix) {
+    private List<Location> locations = new ArrayList<>(List.of(
+     new Location(id.incrementAndGet(), "Somewhere", 23.45, 34.45),
+     new Location(id.incrementAndGet(), "There", 34.56, -12.23),
+     new Location(id.incrementAndGet(), "Here", -56.45, 53.45),
+     new Location(id.incrementAndGet(), "Nowhere", 10.0, 50.0)
+    ));
+
+    public List<LocationDto> getLocations(Optional<String> prefix, Optional<Double> minLat, Optional<Double> maxLat, Optional<Double> minLon, Optional<Double> maxLon) {
         Type targetListType = new TypeToken<List<LocationDto>>(){}.getType();
-            List<Location> filtered = locations.stream()
-                .filter(l -> prefix.isEmpty() || l.getName().toLowerCase().equals(prefix.get().toLowerCase()))
-                .collect(Collectors.toList());
-        return modelMapper.map(filtered, targetListType);
+        return modelMapper.map(locations.stream()
+                .filter(l -> prefix.isEmpty() || l.getName().equalsIgnoreCase(prefix.get()))
+                .filter(l-> minLat.isEmpty() || l.getLat() >= minLat.get())
+                .filter(l-> maxLat.isEmpty() || l.getLat() <= maxLat.get())
+                .filter(l-> minLon.isEmpty() || l.getLon() >= minLon.get())
+                .filter(l-> maxLon.isEmpty() || l.getLon() <= maxLon.get())
+                .collect(Collectors.toList()), targetListType);
     }
 
     public LocationDto findLocationById(long id) {
-        return  modelMapper.map(locations.stream()
-                .filter(l-> l.getId() == id)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("Can not found: " + id)), LocationDto.class);
+        return  modelMapper.map(findById(id), LocationDto.class);
     }
 
-    public LocationDto findMinLonLocation(Optional<String> min) {
-        Type targetListType = new TypeToken<LocationDto>(){}.getType();
-        if (min.get().equalsIgnoreCase("lat")) {
-            return modelMapper.map(locations.stream()
-                    .min(Comparator.comparing(Location::getLat)).get(), targetListType);
-        } else {
-            return modelMapper.map(locations.stream()
-                    .min(Comparator.comparing(Location::getLon)).get(), targetListType);
-        }
+    private Location findById(long id) {
+        Location result = locations.stream()
+                .filter(l-> l.getId() == id)
+                .findFirst()
+                .orElseThrow(()-> new IllegalArgumentException("Location not found! (id: " + id + ")"));
+        return result;
     }
+
 }
