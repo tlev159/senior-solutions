@@ -1,0 +1,23 @@
+GET http://localhost:8080/api/friedhof/year/2020
+Accept: application/json
+
+###
+POST http://localhost:8080/api/friedhof
+Content-Type: application/json
+
+{
+  "plotId": "C-1-1",
+  "nameOfLeaseholder": "Minta5 Aladár"
+}
+
+###
+GET http://localhost:8080/api/friedhof/list?plotId=B-1-1
+Accept: application/json
+
+
+###
+GET http://localhost:8080/api/friedhof/parcel?parcel=B
+Accept: application/json
+
+
+###

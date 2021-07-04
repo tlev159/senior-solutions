@@ -16,9 +16,9 @@ public class FriedhofController {
         this.friedhofService = friedhofService;
     }
 
-    @GetMapping("/{plotId}")
-    public PlotDTO getPlotByPlotId(@PathVariable("plotId") String plotId) {
-        return friedhofService.getPlotByPlotId(plotId);
+    @GetMapping("/parcel")
+    public List<PlotDTO> getPlotByParcel(@RequestParam String parcel) {
+        return friedhofService.getPlotByParcel(parcel);
     }
 
     @DeleteMapping("/{plotId}")
@@ -38,12 +38,12 @@ public class FriedhofController {
         return friedhofService.findPlotsWithParams(nameOfLeaseholder, name);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<PersonDTO> listPersonsOfPlot(@RequestParam String plotId) {
         return friedhofService.listPersonsOfPlot(plotId);
     }
 
-    @GetMapping("/{year}")
+    @GetMapping("/year/{year}")
     public List<PlotDTO> listExpiredPlots(@PathVariable("year") int year) {
         return friedhofService.listExpiredPlots(year);
     }

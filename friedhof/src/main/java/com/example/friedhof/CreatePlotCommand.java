@@ -22,4 +22,11 @@ public class CreatePlotCommand {
     private LocalDate dateOfRedemption;
     private LocalDate dateOfExpiration;
 
+    public CreatePlotCommand(@NonNull String plotId, String nameOfLeaseholder, List<Person> people, LocalDate dateOfRedemption) {
+        this.plotId = plotId;
+        this.nameOfLeaseholder = nameOfLeaseholder;
+        this.people = people;
+        this.dateOfRedemption = dateOfRedemption;
+        this.dateOfExpiration = dateOfRedemption.plusYears(26L);
+    }
 }

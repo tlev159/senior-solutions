@@ -16,10 +16,25 @@ public class FriedhofService {
     private AtomicLong id = new AtomicLong();
 
     private List<Plot> plots = Collections.synchronizedList(new ArrayList<>(List.of(
-            new Plot(id.incrementAndGet(), "A-1-1", "Minta Zsolt",
+            new Plot(id.incrementAndGet(), "A-1-1", "Minta1 Zsolt",
                     List.of(
-                            new Person("Minta Aladár", LocalDate.of(1960,01,01), LocalDate.of(2019,2,15)),
-                            new Person("Minta Balázs", LocalDate.of(1970,02,02), LocalDate.of(2020,3,15))),
+                            new Person("Minta1 Aladár", LocalDate.of(1960,01,01), LocalDate.of(2019,2,15)),
+                            new Person("Minta1 Balázs", LocalDate.of(1970,02,02), LocalDate.of(2020,3,15))),
+                    LocalDate.of(1990,3,3), LocalDate.now()),
+            new Plot(id.incrementAndGet(), "A-1-2", "Minta2 Zsolt",
+                    List.of(
+                            new Person("Minta2 Aladár", LocalDate.of(1960,01,01), LocalDate.of(2019,2,15)),
+                            new Person("Minta2 Balázs", LocalDate.of(1970,02,02), LocalDate.of(2020,3,15))),
+                    LocalDate.of(2019,3,3), LocalDate.now()),
+            new Plot(id.incrementAndGet(), "B-1-1", "Minta3 Zsolt",
+                    List.of(
+                            new Person("Minta3 Aladár", LocalDate.of(1960,01,01), LocalDate.of(2019,2,15)),
+                            new Person("Minta3 Balázs", LocalDate.of(1970,02,02), LocalDate.of(2020,3,15))),
+                    LocalDate.of(1995,3,3), LocalDate.now()),
+            new Plot(id.incrementAndGet(), "B-1-2", "Minta4 Zsolt",
+                    List.of(
+                            new Person("Minta4 Aladár", LocalDate.of(1960,01,01), LocalDate.of(2019,2,15)),
+                            new Person("Minta4 Balázs", LocalDate.of(1970,02,02), LocalDate.of(2020,3,15))),
                     LocalDate.of(2019,3,3), LocalDate.now())
     )));
 
@@ -29,8 +44,15 @@ public class FriedhofService {
         this.modelmapper = modelmapper;
     }
 
-    public PlotDTO getPlotByPlotId(String plotId) {
-        return modelmapper.map(findPlotByPlotId(plotId), PlotDTO.class);
+    public List<PlotDTO> getPlotByParcel(String parcel) {
+        Type targetListType = new TypeToken<List<PlotDTO>>(){}.getType();
+        return modelmapper.map(findPlotByParcel(parcel), targetListType);
+    }
+
+    private List<Plot> findPlotByParcel(String parcel) {
+        return plots.stream()
+                .filter(p->p.getPlotId().startsWith(parcel))
+                .collect(Collectors.toList());
     }
 
     private Plot findPlotByPlotId(String plotId) {
@@ -76,7 +98,7 @@ public class FriedhofService {
 
     public List<PlotDTO> listExpiredPlots(int year) {
         List<Plot> result = plots.stream()
-                .filter(p-> p.getDateOfExpiration().isAfter(LocalDate.of(year - 1, 12, 31)))
+                .filter(p-> p.getDateOfRedemption().isBefore(LocalDate.of(year - 26, 1, 1)))
                 .collect(Collectors.toList());
         Type targetListType = new TypeToken<List<PlotDTO>>(){}.getType();
         return modelmapper.map(result, targetListType);
