@@ -14,7 +14,7 @@ public class LocationsController {
         this.locationsService = locationsService;
     }
 
-    @GetMapping("/locations")
+    @GetMapping("/locations-spring-solution/src/main/java/locations")
     public String getLocations() {
         StringBuilder result = new StringBuilder();
         List<Location> temp = locationsService.getLocations();
